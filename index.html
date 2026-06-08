@@ -29,25 +29,6 @@
       margin-bottom: 1.5em;
     }
     a.download-btn:hover { background: #3a6fd0; }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      font-size: 0.88em;
-      background: #1e1e1e;
-    }
-    thead th {
-      background: #1e3a6e;
-      color: #d4d4d4;
-      padding: 8px 12px;
-      text-align: left;
-      font-weight: normal;
-    }
-    tbody tr:nth-child(even) { background: #252525; }
-    tbody tr:nth-child(odd)  { background: #1e1e1e; }
-    td { padding: 6px 12px; border-bottom: 1px solid #333; color: #d4d4d4; }
-    td.sim-FIREbox     { color: #6fa8dc; font-weight: bold; }
-    td.sim-NIVARIA-LG  { color: #e06c75; font-weight: bold; }
-    td.sim-Recal-EAGLE { color: #c9a96e; font-weight: bold; }
     h2 { font-size: 1.2em; margin-top: 2.5em; border-top: 1px solid #333; padding-top: 1em; color: #f0f0f0; }
     .file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-bottom: 1.5em; }
     .file-card { background: #1e1e1e; border: 1px solid #333; border-radius: 6px; padding: 12px 14px; }
@@ -81,22 +62,12 @@
   </p>
 </div>
 
-<a class="download-btn" href="corner_plot_bottom_panel_data.csv" download>
-  ⬇ Download CSV
-</a>
-
-<table id="data-table">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Simulation</th>
-      <th>log₁₀ M<sub>200</sub> [M☉]</th>
-      <th>log₁₀ M<sub>gas</sub> [M☉]</th>
-      <th>log₁₀ M<sub>HI</sub> [M☉]</th>
-    </tr>
-  </thead>
-  <tbody id="table-body"></tbody>
-</table>
+<div class="file-grid">
+  <div class="file-card">
+    <a href="corner_plot_bottom_panel_data.csv" download>corner_plot_bottom_panel_data.csv</a>
+    <p>log₁₀ M<sub>200</sub>, M<sub>gas</sub>, M<sub>HI</sub> [M☉] for FIREbox, NIVARIA-LG, and Recal-EAGLE (42 rows)</p>
+  </div>
+</div>
 
 <h2>N<sub>HI</sub> Column Density Profiles</h2>
 <p class="description">
@@ -170,25 +141,6 @@
   </ul>
 </div>
 
-<script>
-  fetch('corner_plot_bottom_panel_data.csv')
-    .then(r => r.text())
-    .then(text => {
-      const lines = text.trim().split('\n').slice(1); // skip header
-      const tbody = document.getElementById('table-body');
-      lines.forEach((line, i) => {
-        const [sim, m200, mgas, mhi] = line.split(',');
-        const simClass = 'sim-' + sim.trim().replace(/\s+/g, '-');
-        tbody.innerHTML += `<tr>
-          <td>${i + 1}</td>
-          <td class="${simClass}">${sim}</td>
-          <td>${parseFloat(m200).toFixed(4)}</td>
-          <td>${parseFloat(mgas).toFixed(4)}</td>
-          <td>${parseFloat(mhi).toFixed(4)}</td>
-        </tr>`;
-      });
-    });
-</script>
 
 </body>
 </html>
