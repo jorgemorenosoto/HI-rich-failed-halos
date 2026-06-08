@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HI-rich Failed Halos — Analog Galaxy Data</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 20px;
+      color: #222;
+      background: #fafafa;
+    }
+    h1 { font-size: 1.6em; margin-bottom: 0.2em; }
+    p.subtitle { color: #555; margin-top: 0; font-size: 0.95em; }
+    .description { line-height: 1.6; margin-bottom: 1.5em; }
+    a.download-btn {
+      display: inline-block;
+      padding: 8px 18px;
+      background: #2b5cb8;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9em;
+      margin-bottom: 1.5em;
+    }
+    a.download-btn:hover { background: #1e4190; }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 0.88em;
+      background: #fff;
+    }
+    thead th {
+      background: #2b5cb8;
+      color: #fff;
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: normal;
+    }
+    tbody tr:nth-child(even) { background: #f0f4fb; }
+    td { padding: 6px 12px; border-bottom: 1px solid #ddd; }
+    td.sim-FIREbox     { color: #2b5cb8; font-weight: bold; }
+    td.sim-NIVARIA-LG  { color: crimson;  font-weight: bold; }
+    td.sim-Recal-EAGLE { color: saddlebrown; font-weight: bold; }
+    .note { font-size: 0.8em; color: #777; margin-top: 1.5em; }
+  </style>
+</head>
+<body>
+
+<h1>HI-rich Failed Halos — Analog Galaxy Data</h1>
+<p class="subtitle">Simulated analogs to Cloud-9 from FIREbox, NIVARIA-LG, and Recal-EAGLE</p>
+
+<div class="description">
+  <p>
+    This table contains galaxy-level properties for analog halos selected from three
+    cosmological simulations. Each row is one galaxy; columns give the base-10 logarithm
+    of halo mass (M<sub>200</sub>), total gas mass (M<sub>gas</sub>), and neutral
+    hydrogen mass (M<sub>HI</sub>), all in solar masses.
+  </p>
+  <p>
+    These data underlie the corner-plot figure comparing the three simulations in the
+    M<sub>200</sub>–M<sub>gas</sub>–M<sub>HI</sub> parameter space.
+  </p>
+</div>
+
+<a class="download-btn" href="corner_plot_bottom_panel_data.csv" download>
+  ⬇ Download CSV
+</a>
+
+<table id="data-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Simulation</th>
+      <th>log₁₀ M<sub>200</sub> [M☉]</th>
+      <th>log₁₀ M<sub>gas</sub> [M☉]</th>
+      <th>log₁₀ M<sub>HI</sub> [M☉]</th>
+    </tr>
+  </thead>
+  <tbody id="table-body"></tbody>
+</table>
+
+<p class="note">
+  Recal-EAGLE values digitized from Turini &amp; Benitez-Llambay Fig. 1 and triangulated
+  by M<sub>200</sub> matching. Pair #22 has a 0.069 dex M<sub>200</sub> discrepancy
+  and may need revision.
+</p>
+
+<script>
+  fetch('corner_plot_bottom_panel_data.csv')
+    .then(r => r.text())
+    .then(text => {
+      const lines = text.trim().split('\n').slice(1); // skip header
+      const tbody = document.getElementById('table-body');
+      lines.forEach((line, i) => {
+        const [sim, m200, mgas, mhi] = line.split(',');
+        const simClass = 'sim-' + sim.trim().replace(/\s+/g, '-');
+        tbody.innerHTML += `<tr>
+          <td>${i + 1}</td>
+          <td class="${simClass}">${sim}</td>
+          <td>${parseFloat(m200).toFixed(4)}</td>
+          <td>${parseFloat(mgas).toFixed(4)}</td>
+          <td>${parseFloat(mhi).toFixed(4)}</td>
+        </tr>`;
+      });
+    });
+</script>
+
+</body>
+</html>
