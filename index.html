@@ -10,12 +10,14 @@
       max-width: 960px;
       margin: 40px auto;
       padding: 0 20px;
-      color: #222;
-      background: #fafafa;
+      color: #d4d4d4;
+      background: #121212;
     }
-    h1 { font-size: 1.6em; margin-bottom: 0.2em; }
-    p.subtitle { color: #555; margin-top: 0; font-size: 0.95em; }
+    h1 { font-size: 1.6em; margin-bottom: 0.2em; color: #f0f0f0; }
+    p.subtitle { color: #888; margin-top: 0; font-size: 0.95em; }
     .description { line-height: 1.6; margin-bottom: 1.5em; }
+    a { color: #6fa8dc; }
+    a:hover { color: #a8c8f0; }
     a.download-btn {
       display: inline-block;
       padding: 8px 18px;
@@ -26,32 +28,35 @@
       font-size: 0.9em;
       margin-bottom: 1.5em;
     }
-    a.download-btn:hover { background: #1e4190; }
+    a.download-btn:hover { background: #3a6fd0; }
     table {
       border-collapse: collapse;
       width: 100%;
       font-size: 0.88em;
-      background: #fff;
+      background: #1e1e1e;
     }
     thead th {
-      background: #2b5cb8;
-      color: #fff;
+      background: #1e3a6e;
+      color: #d4d4d4;
       padding: 8px 12px;
       text-align: left;
       font-weight: normal;
     }
-    tbody tr:nth-child(even) { background: #f0f4fb; }
-    td { padding: 6px 12px; border-bottom: 1px solid #ddd; }
-    td.sim-FIREbox     { color: #2b5cb8; font-weight: bold; }
-    td.sim-NIVARIA-LG  { color: crimson;  font-weight: bold; }
-    td.sim-Recal-EAGLE { color: saddlebrown; font-weight: bold; }
-    .note { font-size: 0.8em; color: #777; margin-top: 1.5em; }
-    h2 { font-size: 1.2em; margin-top: 2.5em; border-top: 1px solid #ccc; padding-top: 1em; }
+    tbody tr:nth-child(even) { background: #252525; }
+    tbody tr:nth-child(odd)  { background: #1e1e1e; }
+    td { padding: 6px 12px; border-bottom: 1px solid #333; color: #d4d4d4; }
+    td.sim-FIREbox     { color: #6fa8dc; font-weight: bold; }
+    td.sim-NIVARIA-LG  { color: #e06c75; font-weight: bold; }
+    td.sim-Recal-EAGLE { color: #c9a96e; font-weight: bold; }
+    h2 { font-size: 1.2em; margin-top: 2.5em; border-top: 1px solid #333; padding-top: 1em; color: #f0f0f0; }
     .file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-bottom: 1.5em; }
-    .file-card { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 12px 14px; }
-    .file-card a { color: #2b5cb8; text-decoration: none; font-size: 0.88em; font-family: monospace; }
-    .file-card a:hover { text-decoration: underline; }
-    .file-card p { margin: 4px 0 0; font-size: 0.78em; color: #555; }
+    .file-card { background: #1e1e1e; border: 1px solid #333; border-radius: 6px; padding: 12px 14px; }
+    .file-card a { color: #6fa8dc; text-decoration: none; font-size: 0.88em; font-family: monospace; }
+    .file-card a:hover { text-decoration: underline; color: #a8c8f0; }
+    .file-card p { margin: 4px 0 0; font-size: 0.78em; color: #888; }
+    .references { margin-top: 2.5em; border-top: 1px solid #333; padding-top: 1em; }
+    .references h2 { border-top: none; margin-top: 0; padding-top: 0; }
+    .references ul { padding-left: 1.4em; line-height: 2.0; font-size: 0.9em; }
   </style>
 </head>
 <body>
@@ -122,7 +127,8 @@
   compared to NIVARIA-LG and Recal-EAGLE. The IQR bands show the 25th–75th percentile
   temperature in 0.3 dex hydrogen number density bins. The ratio panel (bottom) shows
   log₁₀(T / T<sub>BL+2017</sub>), where T<sub>BL+2017</sub> is the
-  Benitez-Llambay &amp; Frenk (2017) photoionisation equilibrium reference curve.
+  <a href="https://academic.oup.com/mnras/article/465/4/3913/2544386" target="_blank">BL+2017</a>
+  photoionisation equilibrium reference curve.
 </p>
 <div class="file-grid">
   <div class="file-card">
@@ -147,11 +153,15 @@
   </div>
 </div>
 
-<p class="note">
-  Recal-EAGLE values digitized from Turini &amp; Benitez-Llambay Fig. 1 and triangulated
-  by M<sub>200</sub> matching. Pair #22 has a 0.069 dex M<sub>200</sub> discrepancy
-  and may need revision.
-</p>
+<div class="references">
+  <h2>References</h2>
+  <ul>
+    <li>Moreno et al. (2026) — <a href="https://arxiv.org/abs/2604.27047" target="_blank">arXiv:2604.27047</a></li>
+    <li>NIVARIA-LG — <a href="https://arxiv.org/abs/2601.04024" target="_blank">arXiv:2601.04024</a></li>
+    <li>Recal-EAGLE — <a href="https://arxiv.org/abs/2603.05597" target="_blank">arXiv:2603.05597</a></li>
+    <li>BL+2017 — <a href="https://academic.oup.com/mnras/article/465/4/3913/2544386" target="_blank">MNRAS 465, 3913</a></li>
+  </ul>
+</div>
 
 <script>
   fetch('corner_plot_bottom_panel_data.csv')
